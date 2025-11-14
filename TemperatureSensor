@@ -1,0 +1,45 @@
+package WordProblems.Interfaces;
+
+// ---- TemperatureSensor ----
+public class TemperatureSensor implements Sensor, Wireless {
+    // TODO: fields
+    private static final int DEFAULT_READING = 0;
+    private static final String CAMPUS_NAME = "Ashesi University";
+
+    private int readingInCelsius;
+    private String location;
+    private boolean signalStrength;
+
+    // TODO: constructor
+     public TemperatureSensor(double readingInCelsius, String location, boolean signalStrength){
+        this.readingInCelsius = readingInCelsius;
+        this.location = location;
+        this.signalStrength = signalStrength;
+    }
+
+    // TODO: readValue(), getLocation()
+    public int readValue(){
+        return readingInCelsius;
+    }
+
+    public String getLocation(){
+        return location;
+    }
+
+    // TODO: override isCritical() if above 35C
+    @Override
+    public boolean isCritical(){
+        if (this.readingInCelsius > 35) return true;
+        return false;
+    }
+
+    @Override
+    public String summary(){
+        return CAMPUS_NAME + "[Sensor @ " + getLocation() + "] reading=" + readValue();
+    }
+
+    // TODO: implement getSignalStrength()
+    public String getSignalStrength(){
+        return signalStrength;
+    }
+}
