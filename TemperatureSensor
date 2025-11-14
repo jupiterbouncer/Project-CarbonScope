@@ -8,13 +8,13 @@ public class TemperatureSensor implements Sensor, Wireless {
 
     private int readingInCelsius;
     private String location;
-    private boolean signalStrength;
+    private String signalStrength;
 
     // TODO: constructor
     public TemperatureSensor(){
 
     }
-    
+
     public TemperatureSensor(double readingInCelsius, String location, boolean signalStrength){
         this.readingInCelsius = readingInCelsius;
         this.location = location;
