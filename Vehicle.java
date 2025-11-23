@@ -1,0 +1,44 @@
+public class Vehicle extends CarbonFootprint implements User {
+
+    // Member fields for the Vehicle class
+    protected double mileage;
+    protected double fuelConsumption;
+
+    // Constructor to initalise the Vehicle fields as well as the inherited ones using the super keyword
+    public Vehicle (double mileage, double fuelConsumption){
+        setMileage(mileage);
+        setFuelConsumption(fuelConsumption);
+    }
+
+    public Vehicle (double mileage, double fuelConsumption, double emissionFactor){
+        super (emissionFactor);
+        setMileage(mileage);
+        setFuelConsumption(fuelConsumption);
+    }
+
+    public double getMileage(){
+        return this.mileage;
+    }
+
+    public double getFuelConsumption(){
+        return this.fuelConsumption;
+    }
+
+    public void setMileage(double mileage){
+        if (mileage < 0) throw new IllegalArgumentException("Mileage cannot be negative");
+        else this.mileage = mileage;
+    }
+
+    public void setFuelConsumption(double fuelConsumption){
+        if (fuelConsumption < 0) throw new IllegalArgumentException("Fuel consumption cannot be negative");
+        else this.fuelConsumption = fuelConsumption;
+    }
+
+    public double totalUserFootprint(){
+        return 0.0;
+    }
+
+    public double calculateFootprint(){
+        return 0.0;
+    }
+}
