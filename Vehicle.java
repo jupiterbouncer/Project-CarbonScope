@@ -16,6 +16,7 @@ public class Vehicle extends CarbonFootprint implements User {
         setFuelConsumption(fuelConsumption);
     }
 
+    // Getter methods for the Vehicle class
     public double getMileage(){
         return this.mileage;
     }
@@ -24,6 +25,7 @@ public class Vehicle extends CarbonFootprint implements User {
         return this.fuelConsumption;
     }
 
+    // Setter methods for the Vehicle class
     public void setMileage(double mileage){
         if (mileage < 0) throw new IllegalArgumentException("Mileage cannot be negative");
         else this.mileage = mileage;
@@ -34,11 +36,9 @@ public class Vehicle extends CarbonFootprint implements User {
         else this.fuelConsumption = fuelConsumption;
     }
 
-    public double totalUserFootprint(){
-        return 0.0;
-    }
-
+    // Calculating the carbon footprint for a gasoline car
     public double calculateFootprint(){
-        return 0.0;
+        return 2.3 * mileage * fuelConsumption;
     }
 }
+
