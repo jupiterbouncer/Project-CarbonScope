@@ -18,4 +18,9 @@ public class Bus extends Vehicle {
         if (yearlyUse < 0) throw new IllegalArgumentException("Yearly use cannot be negative");
         else this.yearlyUse = yearlyUse;
     }
+
+    @Override
+    public double calculateFootprint(){
+        return 0.026 * calculateFootprint() * yearlyUse;
+    }
 }
