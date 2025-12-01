@@ -1,4 +1,4 @@
-public class Vehicle extends CarbonFootprint implements User {
+public class Vehicle extends CarbonFootprint {
 
     // Member fields for the Vehicle class
     protected double mileage;
