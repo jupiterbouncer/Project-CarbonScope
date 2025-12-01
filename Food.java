@@ -1,17 +1,14 @@
-package com.example2;
 
 public class Food extends CarbonFootprint {
     //attributes
     private String dietType; // example : meat-heavy,vegan etc
-    private double amount; // amount of diet type consumed 
 
 
     //Food Constructor
 
-    public Food(String dietType, double emissionFactor, double amount){
+    public Food(String dietType, double emissionFactor){
         super(emissionFactor);
         this.dietType = dietType;
-        this.amount = amount;
 
     }
 
@@ -23,19 +20,25 @@ public class Food extends CarbonFootprint {
         this.dietType = dietType;
     }
 
-    public double getAmount(){
-        return amount;
-    }
-
-    public void setAmount(){
-        this.amount = amount;
-    }
-
     @Override
     public double calculateFootprint(){
-        return emissionFactor * amount;
+        if (dietType=="meat-heavy"){
+            return 0.0; //CHANGE THIS TO FOOTPRINT OF THE DIET!!!
+        }
+
+        if (dietType=="vegan"){
+            return 0.0; //CHANGE THIS TO FOOTPRINT OF THE DIET!!!
+        }
+
+        if (dietType=="balanced"){
+            return 0.0; //CHANGE THIS TO FOOTPRINT OF THE DIET!!!
+        }
+
+        else {
+            return 0;
+        }
+
     }
 
 
 }
-
