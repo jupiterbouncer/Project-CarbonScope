@@ -1,4 +1,4 @@
-public class User {  
+public class User implements EmissionFootprintSummary {  
     private Vehicle vehicle; 
     private Home home; 
     private Diet diet; 
@@ -46,6 +46,18 @@ public class User {
     } 
     public void setVehicle(Vehicle vehicle){ 
         this.vehicle = vehicle;
+    }
+
+    @Override
+    public String generateSummary() {
+        // TODO Auto-generated method stub
+        return "";
+    }
+
+    @Override
+    public String generateTips() {
+        // TODO Auto-generated method stub
+        return "";
     }
 
 }
