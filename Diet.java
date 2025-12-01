@@ -13,7 +13,7 @@ public class Diet {
 
     }
 
-    public double getFoodCategory() {
+    public Food  getFoodCategory() {
         return foodCategory;
     }
 
@@ -32,3 +32,4 @@ public class Diet {
     }
 
 }
+
