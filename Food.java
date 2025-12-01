@@ -1,4 +1,3 @@
-package com.example2;
 
 public class Food extends CarbonFootprint {
     //attributes
@@ -23,7 +22,22 @@ public class Food extends CarbonFootprint {
 
     @Override
     public double calculateFootprint(){
-        return emissionFactor *;
+        if (dietType=="meat-heavy"){
+            return 0.0; //CHANGE THIS TO FOOTPRINT OF THE DIET!!!
+        }
+
+        if (dietType=="vegan"){
+            return 0.0; //CHANGE THIS TO FOOTPRINT OF THE DIET!!!
+        }
+
+        if (dietType=="balanced"){
+            return 0.0; //CHANGE THIS TO FOOTPRINT OF THE DIET!!!
+        }
+
+        else {
+            return 0;
+        }
+
     }
 
 
