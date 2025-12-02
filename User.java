@@ -1,5 +1,5 @@
-public class User {  
-    private String name; 
+public class User implements EmissionFootprintSummary {  
+    private String name;
     private String location;
     private Vehicle vehicle; 
     private Home home; 
@@ -63,6 +63,18 @@ public class User {
     } 
     public void setVehicle(Vehicle vehicle){ 
         this.vehicle = vehicle;
+    }
+
+    @Override
+    public String generateSummary() {
+        // TODO Auto-generated method stub
+        return "";
+    }
+
+    @Override
+    public String generateTips() {
+        // TODO Auto-generated method stub
+        return "";
     }
 
 }

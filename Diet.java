@@ -1,5 +1,3 @@
-package com.example2;
-
 public class Diet {
 
     //attributes
@@ -13,7 +11,7 @@ public class Diet {
 
     }
 
-    public Food  getFoodCategory() {
+    public Food getFoodCategory() {
         return foodCategory;
     }
 

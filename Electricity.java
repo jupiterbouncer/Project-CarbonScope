@@ -4,13 +4,13 @@ public class Electricity extends CarbonFootprint {
     
     public Electricity(double eletricityConsumption,double emissionFactor){
         super(emissionFactor);
-        this.eletricityConsumption=eletricityConsumption;
+        this.eletricityConsumption = eletricityConsumption;
 
     }
 
     // get/set emissionfactor will be inherited
     @Override
     public double calculateFootprint(){
-        return eletricityConsumption*emissionFactor;
+        return eletricityConsumption * emissionFactor;
     }
 }

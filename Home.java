@@ -4,9 +4,9 @@ public class Home {
     private double homeFootprint;
 
     public Home(Electricity electricity,Cooking cooking, double homeFootprint){
-        this.electricity=electricity;
-        this.cooking=cooking;
-        this.homeFootprint=homeFootprint;
+        this.electricity = electricity;
+        this.cooking = cooking;
+        this.homeFootprint = homeFootprint;
     }
 
 
@@ -27,7 +27,7 @@ public class Home {
     }
 
     public void setCooking(Cooking cooking){
-        this.cooking=cooking;
+        this.cooking = cooking;
     }
 
  }
