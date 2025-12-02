@@ -8,7 +8,7 @@ public class User implements EmissionFootprintSummary {
 
     public User(String name, String location, Vehicle vehicle, Home home, Diet diet, double kgofWaste) { 
         this.name = name;
-        thsi.location = location; 
+        this.location = location; 
         this.vehicle = vehicle;
         this.home = home;
         this.diet = diet; 
