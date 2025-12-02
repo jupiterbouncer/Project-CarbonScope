@@ -34,6 +34,11 @@ public class CarbonScope extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
+        ImageIcon logo = new ImageIcon("Logo.png");
+        setIconImage(logo.getImage());
+        JLabel logoLabel = new JLabel(logo);
+        add(logoLabel);
+
         // Left Panel (Navigation)
         JPanel leftPanel = new JPanel(new GridLayout(4,1,10,10));
         leftPanel.setPreferredSize(new Dimension(150, 200));
