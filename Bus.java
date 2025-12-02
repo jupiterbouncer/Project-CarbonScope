@@ -3,7 +3,7 @@ public class Bus extends Vehicle {
     private int yearlyUse;
 
     // Constructor to initalise the Bus fields as well as the inherited ones using the super keyword
-    public Bus(int yearlyUse, int mileage, double fuelConsumption){
+    public Bus(int yearlyUse, double mileage, double fuelConsumption){
         super(mileage, fuelConsumption);
         setYearlyUse(yearlyUse);
     }
