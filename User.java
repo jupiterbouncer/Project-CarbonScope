@@ -22,7 +22,7 @@ public class User implements EmissionFootprintSummary {
             total += this.vehicle.calculateFootprint(); 
         } 
         if (this.home != null) { 
-            total += this.home.getHomeFootprint(); 
+            total += this.home.calculateFootprint(); 
         } 
         if(this.diet != null) { 
             total += this.diet.calculateFootprint(); 
