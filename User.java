@@ -17,7 +17,18 @@ public class User implements EmissionFootprintSummary {
     } 
 
     public double totalUserFootprint(){
-        //MUST IMPLEMENT THIS
+        double total = 0.0; 
+        if (this.vehicle != null) { 
+            total += this.vehicle.calculateFootprint(); 
+        } 
+        if (this.home != null) { 
+            total += this.home.getHomeFootprint(); 
+        } 
+        if(this.diet != null) { 
+            total += this.diet.calculateFootprint(); 
+        } 
+        total += (this.kgofWaste * 0.5); // Research shows on average, 0.5 C02 emission per kg of waste 
+        return total;
     }; 
 
     public void addActivity(CarbonFootprint a){ 
