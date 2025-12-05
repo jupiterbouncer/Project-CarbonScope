@@ -1,16 +1,22 @@
 public class Electricity extends CarbonFootprint {
-    private double eletricityConsumption;
-    private double emissionFactor= 0; // CHANGE THIS TO ACTUAL EMISSION FACTOR
-    
-    public Electricity(double eletricityConsumption,double emissionFactor){
-        super(emissionFactor);
-        this.eletricityConsumption = eletricityConsumption;
 
+    private double electricityConsumption;//Eletricity consumed in KWHr in a motnh
+
+    public Electricity(double electricityConsumption, double emissionFactor) {
+        super(0.3);//emission factor for Ghana Grid eletricity distribution
+        this.electricityConsumption = electricityConsumption;
     }
 
-    // get/set emissionfactor will be inherited
     @Override
-    public double calculateFootprint(){
-        return eletricityConsumption * emissionFactor;
+    public double calculateFootprint() {
+        return electricityConsumption * emissionFactor;
+    }
+
+    public double getElectricityConsumption() {
+        return electricityConsumption;
+    }
+
+    public void setElectricityConsumption(double electricityConsumption) {
+        this.electricityConsumption = electricityConsumption;
     }
 }

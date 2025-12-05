@@ -21,6 +21,9 @@ public class CarbonScope extends JFrame{
     // For the Bus screen
     private JTextField yearlyUseField;
 
+    // For the Diet screen
+    private JTextField mealsPerDayField;
+
     // Output area
     private JTextArea outputArea;
 
@@ -88,8 +91,19 @@ public class CarbonScope extends JFrame{
         vehicleScreen.add(vehicleDetailsPanel, BorderLayout.CENTER);
 
         // Diet screen
-        JPanel dietScreen = new JPanel();
-        dietScreen.add(new JLabel("Implement diet here"));
+        JPanel dietScreen = new JPanel(new BorderLayout());
+        JPanel dietSelectPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        dietScreen.add(new JLabel("Select diet type"));
+
+        String[] dietTypes = {"---","Vegetarian", "Meat-heavy", "Balanced"};
+        JComboBox<String> dietCombo = new JComboBox<>(dietTypes);
+        dietSelectPanel.add(dietCombo);
+
+        dietScreen.add(dietSelectPanel, BorderLayout.NORTH);
+
+        JPanel dietDetailsPanel = new JPanel();
+        dietDetailsPanel.setLayout(new BoxLayout(dietDetailsPanel, BoxLayout.Y_AXIS));
+        dietScreen.add(dietDetailsPanel, BorderLayout.CENTER);
 
         // Home activities screen
         JPanel homeActivityScreen = new JPanel();
@@ -125,8 +139,115 @@ public class CarbonScope extends JFrame{
             cardLayout.show(centerPanel, "HOME ACTIVITY");
         });
 
+        // This is for the Home layout
+        vehicleCombo.addActionListener(vc -> {
+            vehicleDetailsPanel.removeAll();
+            String choice = (String) vehicleCombo.getSelectedItem();
+
+            switch (choice) {
+            }
+        });
+
+        // This is for the Diet layout
+        dietCombo.addActionListener(vc -> {
+            dietDetailsPanel.removeAll();
+            String choice = (String) dietCombo.getSelectedItem();
+
+            switch (choice) {
+
+                case "Vegetarian" -> { 
+                    dietDetailsPanel.add(new JLabel("Vegetarian meals (per/week): ")); 
+                    mealsPerDayField = new JTextField(10);
+                    dietDetailsPanel.add(mealsPerDayField);
+
+                    JButton calculateVegButton = new JButton("Calculate Vegetarian Diet Footprint");
+                    dietDetailsPanel.add(calculateVegButton);
+
+                    calculateVegButton.addActionListener(ccb ->{
+
+                    try {
+                        int mealsPerDay = Integer.parseInt(mealsPerDayField.getText());
+
+                        if (mealsPerDay < 0) {
+                            outputArea.append("Meals per week cannot be negative.\n");
+                            return;
+                        }
+
+                        diet = new Diet(Food.VEGETARIAN, mealsPerDay); 
+                        double dietFootprint = diet.calculateFootprint() * 7;
+
+                        outputArea.append("Vegetarian Footprint: " + dietFootprint + "kg CO₂/week\n");
+                    
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(this, "Invalid input!", "Error", JOptionPane.ERROR_MESSAGE);
+                            }
+                        });
+                    }
+
+                case "Meat-heavy" -> {
+                    dietDetailsPanel.add(new JLabel("Meat-heavy meals (per/week): ")); 
+                    mealsPerDayField = new JTextField(10);
+                    dietDetailsPanel.add(mealsPerDayField);
+
+                    JButton calculateMeatButton = new JButton("Calculate Meat-Heavy Diet Footprint");
+                    dietDetailsPanel.add(calculateMeatButton);
+
+                    calculateMeatButton.addActionListener(ccb ->{
+
+                    try {
+                        int mealsPerDay = Integer.parseInt(mealsPerDayField.getText());
+
+                        if (mealsPerDay < 0) {
+                            outputArea.append("Meals per week cannot be negative.\n");
+                            return;
+                        }
+
+                        diet = new Diet(Food.MEATHEAVY, mealsPerDay); 
+                        double dietFootprint = diet.calculateFootprint() * 7;
+
+                        outputArea.append("Vegetarian Footprint: " + dietFootprint + "kg CO₂/week\n");
+                    
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(this, "Invalid input!", "Error", JOptionPane.ERROR_MESSAGE);
+                            }
+                        });
+                }
+
+                case "Balanced" -> {
+                    dietDetailsPanel.add(new JLabel("Balanced meals (per/week): ")); 
+                    mealsPerDayField = new JTextField(10);
+                    dietDetailsPanel.add(mealsPerDayField);
+
+                    JButton calculateBalancedButton = new JButton("Calculate Balanced Diet Footprint");
+                    dietDetailsPanel.add(calculateBalancedButton);
+
+                    calculateBalancedButton.addActionListener(ccb ->{
+
+                    try {
+                        int mealsPerDay = Integer.parseInt(mealsPerDayField.getText());
+
+                        if (mealsPerDay < 0) {
+                            outputArea.append("Meals per week cannot be negative.\n");
+                            return;
+                        }
+
+                        diet = new Diet(Food.BALANCED, mealsPerDay); 
+                        double dietFootprint = diet.calculateFootprint() * 7;
+
+                        outputArea.append("Vegetarian Footprint: " + dietFootprint + "kg CO₂/week\n");
+                    
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(this, "Invalid input!", "Error", JOptionPane.ERROR_MESSAGE);
+                            }
+                        });
+                }
+            }
+
+
+        });
+
         
-        // This is the vehicle layout
+        // This is for the vehicle layout
         vehicleCombo.addActionListener(vc -> {
             vehicleDetailsPanel.removeAll();
             String choice = (String) vehicleCombo.getSelectedItem();
