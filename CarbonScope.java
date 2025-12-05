@@ -323,7 +323,7 @@ public class CarbonScope extends JFrame {
         if (electricityObj != null || cookingObj != null) {
             home = new Home(electricityObj, cookingObj);
             homeTotalLabel.setText("Home Total Emissions: " +
-                    String.format("%.2f", home.calculateFootprint()) + " kg CO₂/year");
+                    String.format("%.2f", home.calculateFootprint()) + " kg CO₂/month");
         }
     }
 
