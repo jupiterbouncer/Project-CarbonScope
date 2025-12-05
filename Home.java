@@ -1,13 +1,11 @@
-public class Home {
+public class Home extends CarbonFootprint {
 
     private Electricity electricity;
     private Cooking cooking;
-    private double homeFootprint;
 
     public Home(Electricity electricity, Cooking cooking) {
         this.electricity = electricity;
         this.cooking = cooking;
-        calculateHomeFootprint();
     }
 
     // Getters
@@ -19,26 +17,21 @@ public class Home {
         return cooking;
     }
 
-    public double getHomeFootprint() {
-        return homeFootprint;
-    }
-
     // Setters
     public void setElectricity(Electricity electricity) {
         this.electricity = electricity;
-        calculateHomeFootprint();
     }
 
     public void setCooking(Cooking cooking) {
         this.cooking = cooking;
-        calculateHomeFootprint();
     }
 
-    // Automatically calculate total home footprint
-    private void calculateHomeFootprint() {
+    // Implement abstract method from CarbonFootprint
+    @Override
+    public double calculateFootprint() {
         double total = 0;
         if (electricity != null) total += electricity.calculateFootprint();
         if (cooking != null) total += cooking.calculateFootprint();
-        this.homeFootprint = total;
+        return total;
     }
 }
