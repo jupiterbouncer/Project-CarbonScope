@@ -112,17 +112,17 @@ public class CarbonScope extends JFrame {
         outputArea.setEditable(false);
         add(new JScrollPane(outputArea), BorderLayout.SOUTH);
 
-        //  Navigation buttons
+        // --- Navigation buttons
         homeButton.addActionListener(e -> cardLayout.show(centerPanel, "HOME"));
         vehicleButton.addActionListener(e -> cardLayout.show(centerPanel, "VEHICLE"));
         dietButton.addActionListener(e -> cardLayout.show(centerPanel, "DIET"));
         homeActivityButton.addActionListener(e -> cardLayout.show(centerPanel, "HOME ACTIVITIES"));
 
-        //  Electricity listener
+        // --- Electricity listener
         saveElectricityBtn.addActionListener(e -> {
             try {
                 double consumption = Double.parseDouble(electricityField.getText());
-                electricityObj = new Electricity(consumption);
+                electricityObj = new Electricity(consumption, 0.3); // fixed emission factor
                 updateHomeTotal();
                 JOptionPane.showMessageDialog(this, "Electricity data saved!");
             } catch (Exception ex) {
@@ -130,7 +130,7 @@ public class CarbonScope extends JFrame {
             }
         });
 
-        //  Cooking listener
+        // --- Cooking listener
         saveCookingBtn.addActionListener(e -> {
             try {
                 double usage = Double.parseDouble(fuelUsageField.getText());
@@ -146,12 +146,12 @@ public class CarbonScope extends JFrame {
         setVisible(true);
     }
 
-    //  Update home total emissions
+    // --- Update home total emissions
     private void updateHomeTotal() {
         if (electricityObj != null || cookingObj != null) {
             homeObj = new Home(electricityObj, cookingObj);
             homeTotalLabel.setText("Home Total Emissions: " +
-                    String.format("%.2f", homeObj.getHomeFootprint()) + " CO₂/year");
+                    String.format("%.2f", homeObj.calculateFootprint()) + " CO₂/year");
         }
     }
 
