@@ -32,7 +32,15 @@ public class User implements EmissionFootprintSummary {
     }; 
 
     public void addActivity(CarbonFootprint a){ 
-        //MUST IMPLEMENT THIS 
+        if (a != null) { 
+            if (a instanceof Vehicle) { 
+                this.vehicle = (Vehicle) a;  
+            } else if (a instanceof Home) { 
+                this.home = (Home) a;
+            } else if (a instanceof Diet) { 
+                this.diet = (Diet) a; 
+            }
+        }
     }; 
 
     public String getName() { 
@@ -77,15 +85,44 @@ public class User implements EmissionFootprintSummary {
     }
 
     @Override
-    public String generateSummary() {
-        // TODO Auto-generated method stub
-        return "";
+    public String generateSummary() { 
+        double wasteFactor = 0.5;
+        double wasteFootprint = this.kgofWaste * wasteFactor; 
+        
+       String summary = 
+       "Carbon Footprint for: " + this.name + "\n" + 
+       "Location: " + this.location + "\n" + 
+       "Vehicle Footprint : " + vehicle.calculateFootprint() + " kg CO2\n" + 
+       "Home Footprint: " + home.calculateFootprint() + " kg CO2\n" + 
+       "Diet Footprint:" + diet.calculateFootprint() + " kg CO2\n" + 
+       "Waste Footprint: " + wasteFootprint + " kg C02\n" + 
+       "Total Carbon Footprint : " + totalUserFootprint() + " kgC02\n"; 
+       return summary;
     }
 
     @Override
     public String generateTips() {
-        // TODO Auto-generated method stub
-        return "";
-    }
+    double wasteFactor = 0.5;
+    double vehicleFootprint = vehicle.calculateFootprint();
+    double homeFootprint = home.calculateFootprint();
+    double dietFootprint = diet.calculateFootprint();
+    double wasteFootprint = kgofWaste * wasteFactor; 
 
-}
+    String tips = "Carbon Footprint Reduction Tips for " + name + ":\n"; 
+
+    if (vehicleFootprint > 1000) { 
+        tips += "- Consider using public transportation, reducing car travel, or switching to a more fuel efficient or electric vehicle.\n"; 
+    }  
+    if(homeFootprint > 2000) { 
+        tips += "I- Improve home energy efficiency by using energy-efficient appliances, insulating your home, and switching to renewable energy sources.\n";
+    } 
+    if (dietFootprint > 1500) { 
+        tips += "- Adopt a more plant-based diet, reduce meat consumption, and minimize food waste.\n";  
+    } 
+    if (wasteFootprint > 100) { 
+        tips += "- Reduce waste by recycling, composting, and minimizing single-use plastics.\n"; 
+    } 
+    return tips; 
+
+}  
+} 
