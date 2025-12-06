@@ -1,8 +1,8 @@
 # Project CarbonScope
 
-Deron Asante-Twum | 09712028 \n
-Janet Nortey | 23112028 \n
-Papa Nii Dodoo | 80152028 \n
-Oluwademilade Subair | 58742028 \n
+# Deron Asante-Twum | 09712028 
+# Janet Nortey | 23112028 
+# Papa Nii Dodoo | 80152028
+# Oluwademilade Subair | 58742028 
 
-Group 8
+# Group 8
