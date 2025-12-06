@@ -34,7 +34,7 @@ public class CarbonScope extends JFrame{
 
     public CarbonScope() {
 
-        setTitle("CARBONSCOPE: YOUR CARBON FOOTPRINT ASSISTANT");
+        setTitle("CARBONSCOPE: Your Carbon Footprint Assistant");
         setSize(900,700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -105,6 +105,18 @@ public class CarbonScope extends JFrame{
         JPanel homeScreen = new JPanel(new GridLayout(3,1,10,10));
         homeScreen.setBackground(lightCream);
         homeScreen.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+
+        homeScreen.add(new JLabel("Name:"));
+        userNameField = new JTextField(10);
+        homeScreen.add(userNameField);
+        userNameField.setBackground(lightCream);
+        userNameField.setBorder(BorderFactory.createLineBorder(new Color(230, 220, 210)));
+
+        homeScreen.add(new JLabel("Location:"));
+        userLocationField = new JTextField(10);
+        homeScreen.add(userLocationField);
+        userLocationField.setBackground(lightCream);
+        userLocationField.setBorder(BorderFactory.createLineBorder(new Color(230, 220, 210)));
 
         vehicleButton = new JButton("VEHICLE");
         vehicleButton.setBackground(leafGreen);
@@ -226,7 +238,7 @@ public class CarbonScope extends JFrame{
                         fuelConsumptionField = new JTextField(10);
                         fuelConsumptionField.setBackground(lightCream);
                         fuelConsumptionField.setBorder(BorderFactory.createLineBorder(new Color(230, 220, 210)));
-                        
+
                         activityDetailsPanel.add(fuelConsumptionField);
 
                         activityDetailsPanel.add(new JLabel("Fuel Type:"));
@@ -569,7 +581,13 @@ public class CarbonScope extends JFrame{
             vehicleDetailsPanel.repaint();
         });
 
+        // To model our user
+        user = new User(userNameField.getText(), userLocationField.getText(), userVehicle, home, diet, 320);
+
         calculatorButton.addActionListener(cb -> {
+            while (userNameField == null || userNameField.getText().isBlank() || userLocationField == null || userLocationField.getText().isBlank()){
+                outputArea.append("Kindly enter your name and location");
+            }
 
             // Calculate screen
             JPanel calculateScreen = new JPanel(new GridLayout(3,1,10,10));
@@ -586,14 +604,38 @@ public class CarbonScope extends JFrame{
             calculateScreen.add(calculateTotalButton);
 
             calculateTotalButton.addActionListener(ct -> {
-                double total = 0.0;
-                if (userVehicle != null) total += userVehicle.calculateFootprint();
-                if (diet != null) total += diet.calculateFootprint() * 7; // per week
-                if (home != null) total += home.calculateFootprint();
-
-                outputArea.append("\n=== Total Footprint: " + total + " kg CO₂ ===\n");
+                outputArea.append("\n=== Total Footprint: " + user.totalUserFootprint() + " kg CO₂ ===\n");
             });
 
+        });
+
+        summaryButton.addActionListener(cb -> {
+            while (userNameField == null || userNameField.getText().isBlank() || userLocationField == null || userLocationField.getText().isBlank()){
+                outputArea.append("Kindly enter your name and location");
+            }
+
+            // Summary statistics screen
+            JPanel summaryScreen = new JPanel(new GridLayout(3,1,10,10));
+            summaryScreen.setBackground(lightCream);
+            summaryScreen.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+
+            // -------------------- Summarizing user's total footprint --------------------
+            outputArea.append(user.generateSummary());
+
+        });
+
+        tipsButton.addActionListener(cb -> {
+            while (userNameField == null || userNameField.getText().isBlank() || userLocationField == null || userLocationField.getText().isBlank()){
+                outputArea.append("Kindly enter your name and location");
+            }
+
+            // Tips screen
+            JPanel tipsScreen = new JPanel(new GridLayout(3,1,10,10));
+            tipsScreen.setBackground(lightCream);
+            tipsScreen.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+
+            // -------------------- Tips tailored to a user's total footprint --------------------
+            outputArea.append(user.generateTips());
         });
 
         setVisible(true);
