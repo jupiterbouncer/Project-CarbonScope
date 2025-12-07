@@ -238,6 +238,8 @@ public class CarbonScope extends JFrame{
         // Navigation buttons and their action listeners i.e switching screens to the corresponding title
         homeButton.addActionListener(hb -> {
             cardLayout.show(centerPanel, "HOME");
+            centerPanel.revalidate();
+            centerPanel.repaint();
         });
 
         vehicleButton.addActionListener(vb -> {
@@ -484,6 +486,13 @@ public class CarbonScope extends JFrame{
 
                     vehicleDetailsPanel.add(fuelConsumptionField);
 
+                    vehicleDetailsPanel.add(new JLabel("Fuel Type:"));
+                    String[] engineType = {"---", "GASOLINE","DIESEL","ELECTRIC","HYBRID"};
+                    JComboBox<String> engineTypeBox = new JComboBox<>(engineType);
+                    vehicleSelectPanel.add(engineTypeBox);
+                        
+                    vehicleDetailsPanel.add(vehicleSelectPanel, BorderLayout.NORTH);
+
                     JButton calculateCarButton = new JButton("Calculate Car Footprint");
                     calculateCarButton.setBackground(leafGreen);
                     calculateCarButton.setForeground(Color.WHITE);
@@ -497,13 +506,14 @@ public class CarbonScope extends JFrame{
                     try {
                         double mileage = Double.parseDouble(mileageField.getText());
                         double fuelConsumption = Double.parseDouble(fuelConsumptionField.getText());
+                        String engineChoice = (String) engineTypeBox.getSelectedItem();
 
                         if (mileage < 0 || fuelConsumption < 0) {
                             outputArea.append("Mileage nor fuel cannot be negative.\n");
                             return;
                         }
 
-                        userVehicle = new Car("Gasoline", mileage, fuelConsumption); 
+                        userVehicle = new Car(engineChoice, mileage, fuelConsumption); 
                         double vehicleFootprint = userVehicle.calculateFootprint();
 
                         outputArea.append("Car Footprint: " + vehicleFootprint + "kg CO₂/week\n");
@@ -606,9 +616,7 @@ public class CarbonScope extends JFrame{
                         });
                         break;
                     }
-                    
             }
-
             vehicleDetailsPanel.revalidate();
             vehicleDetailsPanel.repaint();
         });
