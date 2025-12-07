@@ -1,11 +1,15 @@
-public class User implements EmissionFootprintSummary {  
+public class User implements EmissionFootprintSummary {
+    //storing user name and location
     private String name;
     private String location;
+    //calling the vehicle, home and diet objects as member variables
     private Vehicle vehicle; 
     private Home home; 
-    private Diet diet; 
+    private Diet diet;
+
     private double kgofWaste;  
 
+    //constructor for the user class
     public User(String name, String location, Vehicle vehicle, Home home, Diet diet, double kgofWaste) { 
         this.name = name;
         this.location = location; 
@@ -15,13 +19,13 @@ public class User implements EmissionFootprintSummary {
         this.kgofWaste = kgofWaste; 
 
     } 
-
+    //method that calculates the total footprint based on the vehicle, home and diet footprint
     public double totalUserFootprint(){
         double total = 0.0; 
         if (this.vehicle != null) { 
             total += this.vehicle.calculateFootprint(); 
         } 
-        if (this.home != null) { 
+        if (this.home != null) {
             total += this.home.calculateFootprint(); 
         } 
         if(this.diet != null) { 
@@ -42,7 +46,7 @@ public class User implements EmissionFootprintSummary {
             }
         }
     }; 
-
+    //getters and setters for the various member variables
     public String getName() { 
         return this.name; 
     } 
@@ -84,6 +88,7 @@ public class User implements EmissionFootprintSummary {
         this.vehicle = vehicle;
     }
 
+    //this method generates a summary of the user footprint
     @Override
     public String generateSummary() { 
         double wasteFactor = 0.5;
@@ -100,6 +105,7 @@ public class User implements EmissionFootprintSummary {
        return summary;
     }
 
+    // this method generates the tips for the user based on the calculated footprints
     @Override
     public String generateTips() {
     double wasteFactor = 0.5;
