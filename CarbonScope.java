@@ -54,13 +54,6 @@ public class CarbonScope extends JFrame{
         // Adding logo
         ImageIcon logo = new ImageIcon("Logo.png");
         setIconImage(logo.getImage());
-        JLabel logoLabel = new JLabel(logo);
-
-        JPanel header = new JPanel(new BorderLayout());
-        header.setBackground(cream);
-        header.setBorder(BorderFactory.createEmptyBorder(20,10,20,10));
-        header.add(logoLabel, BorderLayout.NORTH);
-        add(header, BorderLayout.NORTH);
 
         // Left Panel (Navigation)
         JPanel leftPanel = new JPanel(new GridLayout(4,1,10,10));
@@ -99,9 +92,16 @@ public class CarbonScope extends JFrame{
 
         // Adding these buttons to the left panel
         leftPanel.add(homeButton);
+        addHoverEffect(homeButton);
+
         leftPanel.add(calculatorButton);
+        addHoverEffect(calculatorButton);
+
         leftPanel.add(summaryButton);
+        addHoverEffect(summaryButton);
+
         leftPanel.add(tipsButton);
+        addHoverEffect(tipsButton);
 
         // Adding the panel (now with buttons) to the GUI
         add(leftPanel, BorderLayout.WEST);
@@ -111,6 +111,48 @@ public class CarbonScope extends JFrame{
         centerPanel.setBackground(cream);
         CardLayout cardLayout = new CardLayout();
         centerPanel.setLayout(cardLayout);
+
+        // =============== DASHBOARD ====================
+        JPanel dashboardScreen = new JPanel();
+        dashboardScreen.setLayout(new BoxLayout(dashboardScreen, BoxLayout.Y_AXIS));
+        dashboardScreen.setBackground(lightCream);
+        dashboardScreen.setBorder(BorderFactory.createEmptyBorder(40,40,40,40));
+
+        JLabel logoLabel = new JLabel(logo);
+        logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        dashboardScreen.add(logoLabel);
+
+        dashboardScreen.add(Box.createRigidArea(new Dimension(0,30)));
+
+        JButton getStartedButton = new JButton("Get Started");
+        getStartedButton.setBackground(leafGreen);
+        getStartedButton.setForeground(Color.WHITE);
+        getStartedButton.setBorderPainted(false);
+        getStartedButton.setOpaque(true);
+        getStartedButton.setFont(new Font("Sagoe UI", Font.BOLD, 16));
+        getStartedButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        dashboardScreen.add(getStartedButton);
+
+        JLabel motivation = new JLabel("Track your impact. Take control!", SwingConstants.CENTER);
+        motivation.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        motivation.setAlignmentX(Component.CENTER_ALIGNMENT);
+        dashboardScreen.add(motivation);
+
+        dashboardScreen.add(Box.createRigidArea(new Dimension(0,20)));
+
+        JLabel globalStat = new JLabel("Global Average CO₂ Emissions Per Person: 4.7 tons/year", SwingConstants.CENTER);
+        globalStat.setFont(new Font("Segoe UI", Font.ITALIC, 16));
+        getStartedButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        dashboardScreen.add(globalStat);
+
+        dashboardScreen.add(Box.createRigidArea(new Dimension(0,30)));
+
+        centerPanel.add(dashboardScreen, "DASHBOARD");
+
+        getStartedButton.addActionListener(gsb -> {
+            cardLayout.show(centerPanel, "HOME");
+        });
 
         // Home screen (default screen) for users to pick which type of footprint to calculate
         JPanel homeScreen = new JPanel(new GridLayout(3,1,10,10));
@@ -159,8 +201,27 @@ public class CarbonScope extends JFrame{
 
         // Adding these buttons to the home screen
         homeScreen.add(vehicleButton);
+        addHoverEffect(vehicleButton);
+
         homeScreen.add(homeActivityButton);
+        addHoverEffect(homeActivityButton);
+
         homeScreen.add(dietButton);
+        addHoverEffect(dietButton);
+
+        // Summary statistics screen
+        JPanel summaryScreen = new JPanel(new GridLayout(3,1,10,10));
+        summaryScreen.setBackground(lightCream);
+        summaryScreen.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+
+        centerPanel.add(summaryScreen, "SUMMARY");
+
+        // Tips screen
+        JPanel tipsScreen = new JPanel(new GridLayout(3,1,10,10));
+        tipsScreen.setBackground(lightCream);
+        tipsScreen.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+
+        centerPanel.add(tipsScreen, "TIPS");
 
         // Vehicle screen
         JPanel vehicleScreen = new JPanel(new BorderLayout());
@@ -237,7 +298,7 @@ public class CarbonScope extends JFrame{
 
         // Navigation buttons and their action listeners i.e switching screens to the corresponding title
         homeButton.addActionListener(hb -> {
-            cardLayout.show(centerPanel, "HOME");
+            cardLayout.show(centerPanel, "DASHBOARD");
             centerPanel.revalidate();
             centerPanel.repaint();
         });
@@ -648,55 +709,42 @@ public class CarbonScope extends JFrame{
 
             calculateScreen.add(calculateTotalButton);
 
-            calculateTotalButton.addActionListener(ct -> {
+            calculateTotalButton.addActionListener(ctb -> {
                 outputArea.append("\n=== Total Footprint: " + user.totalUserFootprint() + " kg CO₂ ===\n");
             });
+
+            calculateScreen.revalidate();
 
         });
 
         // When the summary button is clicked
-        summaryButton.addActionListener(cb -> {
+        summaryButton.addActionListener(sb -> {
             if (user == null){
                 JOptionPane.showMessageDialog(this, "Please calculate your footprint first");
                 return;
             }
 
-            // Summary statistics screen
-            JPanel summaryScreen = new JPanel(new GridLayout(3,1,10,10));
-            summaryScreen.setBackground(lightCream);
-            summaryScreen.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+            // To model our user (need a label to collect kg of waste)
+            user = new User(userNameField.getText(), userLocationField.getText(), userVehicle, home, diet, 32);
 
-            centerPanel.add(summaryScreen, "SUMMARY");
             cardLayout.show(centerPanel, "SUMMARY");
 
-            // -------------------- Calculate user's total footprint --------------------
-            summarizeButton = new JButton("CARBON FOOTPRINT SUMMARY");
-            summarizeButton.setBackground(leafGreen);
-            summarizeButton.setForeground(Color.WHITE);
-            summarizeButton.setBorderPainted(false);
-            summarizeButton.setOpaque(true);
+            // -------------------- Summarizing user's total footprint --------------------
+            outputArea.append("\n" + user.generateSummary() + "\n");
 
-            summaryScreen.add(summarizeButton);
-
-            summarizeButton.addActionListener(ct -> {
-                // -------------------- Summarizing user's total footprint --------------------
-                outputArea.append("\n" + user.generateSummary() + "\n");
-            });
+            summaryScreen.revalidate();
 
         });
 
         // When the tips button is clicked
-        tipsButton.addActionListener(cb -> {
+        tipsButton.addActionListener(tb -> {
             if (user == null){
                 JOptionPane.showMessageDialog(this, "Please calculate your footprint first");
             }
 
-            // Tips screen
-            JPanel tipsScreen = new JPanel(new GridLayout(3,1,10,10));
-            tipsScreen.setBackground(lightCream);
-            tipsScreen.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+            // To model our user (need a label to collect kg of waste)
+            user = new User(userNameField.getText(), userLocationField.getText(), userVehicle, home, diet, 32);
 
-            centerPanel.add(tipsScreen, "TIPS");
             cardLayout.show(centerPanel, "TIPS");
 
             // -------------------- Tips tailored to a user's total footprint --------------------
@@ -713,6 +761,18 @@ public class CarbonScope extends JFrame{
             home = new Home(electricity, cooking);
             outputArea.append("Home Total Emissions: " + String.format("%.2f", home.calculateFootprint()) + " kg CO₂/year");
         }
+    }
+
+    private void addHoverEffect(JButton button){
+        button.addMouseListener(new java.awt.event.MouseAdapter(){
+            public void mouseEntered(java.awt.event.MouseEvent event){
+                button.setBackground(new Color(102,187,106)); // lighter green
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent event){
+                button.setBackground(new Color(76,175,80)); // original
+            }
+        });
     }
 
     public static void main(String[] args) {
