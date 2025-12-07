@@ -1,0 +1,21 @@
+Running the Carbon Footprint Calculator (Command Line Guide)
+
+This guide explains how to compile and run the CarbonScope Java Swing application using the command line
+
+- Before running the program, ensure our .java files are stored in the same folder
+
+- Your IDE should be navigated to our project folder (Project-CarbonScope)
+
+- Compile the program using:
+javac CarbonScope.java
+
+- Run the program, using the main class:
+java CarbonScope
+
+
+TROUBLESHOOTING
+Error: Could not find or load main class
+
+Cause: Running Java from the wrong folder
+
+Please ensure the files are in the same directory!

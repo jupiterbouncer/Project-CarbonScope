@@ -30,7 +30,7 @@ public class CarbonScope extends JFrame{
     private JButton homeButton, calculatorButton, summaryButton, tipsButton;
     private JButton vehicleButton, homeActivityButton, dietButton;
 
-    private JButton calculateTotalButton;
+    private JButton calculateTotalButton, summarizeButton;
 
     public CarbonScope() {
 
@@ -55,7 +55,12 @@ public class CarbonScope extends JFrame{
         ImageIcon logo = new ImageIcon("Logo.png");
         setIconImage(logo.getImage());
         JLabel logoLabel = new JLabel(logo);
-        add(logoLabel, BorderLayout.NORTH);
+
+        JPanel header = new JPanel(new BorderLayout());
+        header.setBackground(cream);
+        header.setBorder(BorderFactory.createEmptyBorder(20,10,20,10));
+        header.add(logoLabel, BorderLayout.NORTH);
+        add(header, BorderLayout.NORTH);
 
         // Left Panel (Navigation)
         JPanel leftPanel = new JPanel(new GridLayout(4,1,10,10));
@@ -64,78 +69,95 @@ public class CarbonScope extends JFrame{
         leftPanel.setPreferredSize(new Dimension(150, 200));
 
         // Main buttons for navigating the app
+        // Home button for inputting emission
         homeButton = new JButton("HOME");
         homeButton.setBackground(leafGreen);
         homeButton.setForeground(Color.WHITE);
         homeButton.setBorderPainted(false);
         homeButton.setOpaque(true);
 
+        // Calculator button for the total carbon footprint of user
         calculatorButton = new JButton("CALCULATE");
         calculatorButton.setBackground(leafGreen);
         calculatorButton.setForeground(Color.WHITE);
         calculatorButton.setBorderPainted(false);
         calculatorButton.setOpaque(true);
 
+        // Summary button that provides a breakdown
         summaryButton = new JButton("SUMMARY");
         summaryButton.setBackground(leafGreen);
         summaryButton.setForeground(Color.WHITE);
         summaryButton.setBorderPainted(false);
         summaryButton.setOpaque(true);
 
+        // Tips button that dispenses instructions based on earlier calculated footprints
         tipsButton = new JButton("TIPS");
         tipsButton.setBackground(leafGreen);
         tipsButton.setForeground(Color.WHITE);
         tipsButton.setBorderPainted(false);
         tipsButton.setOpaque(true);
 
+        // Adding these buttons to the left panel
         leftPanel.add(homeButton);
         leftPanel.add(calculatorButton);
         leftPanel.add(summaryButton);
         leftPanel.add(tipsButton);
 
+        // Adding the panel (now with buttons) to the GUI
         add(leftPanel, BorderLayout.WEST);
 
-        // Center panel with content
+        // Center panel where content will be displayed
         JPanel centerPanel = new JPanel();
         centerPanel.setBackground(cream);
         CardLayout cardLayout = new CardLayout();
         centerPanel.setLayout(cardLayout);
 
-        // Home screen
+        // Home screen (default screen) for users to pick which type of footprint to calculate
         JPanel homeScreen = new JPanel(new GridLayout(3,1,10,10));
         homeScreen.setBackground(lightCream);
         homeScreen.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 
-        homeScreen.add(new JLabel("Name:"));
+        JPanel formPanel = new JPanel(new GridLayout(2,2,10,10));
+        formPanel.setBackground(lightCream);
+
+        // TextField for user's name
+        formPanel.add(new JLabel("Name:"));
         userNameField = new JTextField(10);
-        homeScreen.add(userNameField);
         userNameField.setBackground(lightCream);
         userNameField.setBorder(BorderFactory.createLineBorder(new Color(230, 220, 210)));
+        formPanel.add(userNameField);
 
-        homeScreen.add(new JLabel("Location:"));
+        // TextField for user's location
+        formPanel.add(new JLabel("Location:"));
         userLocationField = new JTextField(10);
-        homeScreen.add(userLocationField);
         userLocationField.setBackground(lightCream);
         userLocationField.setBorder(BorderFactory.createLineBorder(new Color(230, 220, 210)));
+        formPanel.add(userLocationField);
 
+        homeScreen.add(formPanel, BorderLayout.NORTH);
+
+        // The vehicle button for matters relating to Vehicles
         vehicleButton = new JButton("VEHICLE");
         vehicleButton.setBackground(leafGreen);
         vehicleButton.setForeground(Color.WHITE);
         vehicleButton.setBorderPainted(false);
         vehicleButton.setOpaque(true);
 
+        // The home activity button for matters relating to Home
         homeActivityButton = new JButton("HOME ACTIVITIES");
         homeActivityButton.setBackground(leafGreen);
         homeActivityButton.setForeground(Color.WHITE);
         homeActivityButton.setBorderPainted(false);
         homeActivityButton.setOpaque(true);
 
+        // The diet button for matters relating to Diet
         dietButton = new JButton("DIET");
         dietButton.setBackground(leafGreen);
         dietButton.setForeground(Color.WHITE);
         dietButton.setBorderPainted(false);
         dietButton.setOpaque(true);
 
+        // Adding these buttons to the home screen
         homeScreen.add(vehicleButton);
         homeScreen.add(homeActivityButton);
         homeScreen.add(dietButton);
@@ -145,6 +167,7 @@ public class CarbonScope extends JFrame{
         vehicleScreen.setBackground(lightCream);
         vehicleScreen.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 
+        // Users are able to select their type of vehicle to calculate its specific emission
         JPanel vehicleSelectPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         vehicleSelectPanel.add(new JLabel("Select Vehicle Type: "));
 
@@ -162,9 +185,10 @@ public class CarbonScope extends JFrame{
         JPanel dietScreen = new JPanel(new BorderLayout());
         dietScreen.setBackground(lightCream);
         dietScreen.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
-        JPanel dietSelectPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
-        dietScreen.add(new JLabel("Select diet type"));
+        // Users should be select their diet type to calculate its specific emission
+        JPanel dietSelectPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        dietSelectPanel.add(new JLabel("Select diet type"));
 
         String[] dietTypes = {"---","Vegetarian", "Meat-heavy", "Balanced"};
         JComboBox<String> dietCombo = new JComboBox<>(dietTypes);
@@ -181,10 +205,11 @@ public class CarbonScope extends JFrame{
         homeActivityScreen.setBackground(lightCream);
         homeActivityScreen.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 
+        // Users should be select the type of home activity to calculate its specific emission
         JPanel activitiesSelectPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-
-        homeActivityScreen.add(new JLabel("Select home activities"));
-        String[] homeActivityTypes = {"---","Cooking", "Electricity use"};
+        activitiesSelectPanel.add(new JLabel("Select home activities"));
+        
+        String[] homeActivityTypes = {"---","Cooking", "Electricity"};
         JComboBox<String> homeActivitiesCombo = new JComboBox<>(homeActivityTypes);
         activitiesSelectPanel.add(homeActivitiesCombo);
 
@@ -202,7 +227,7 @@ public class CarbonScope extends JFrame{
 
         add(centerPanel, BorderLayout.CENTER);
         
-        // Output area
+        // Customizing the output area
         outputArea = new JTextArea(10,70);
         outputArea.setBackground(lightCream);
         outputArea.setBorder(BorderFactory.createEmptyBorder(15,15,15,15));
@@ -210,7 +235,7 @@ public class CarbonScope extends JFrame{
 
         add(new JScrollPane(outputArea), BorderLayout.SOUTH);
 
-        // Navigation buttons and their action listeners
+        // Navigation buttons and their action listeners i.e switching screens to the corresponding title
         homeButton.addActionListener(hb -> {
             cardLayout.show(centerPanel, "HOME");
         });
@@ -272,6 +297,7 @@ public class CarbonScope extends JFrame{
                         JOptionPane.showMessageDialog(this, "Invalid cooking input!", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 });
+                break;
                     
                 }
                 case "Electricity" -> {
@@ -304,7 +330,7 @@ public class CarbonScope extends JFrame{
                         JOptionPane.showMessageDialog(this, "Invalid electricity input!", "Error", JOptionPane.ERROR_MESSAGE);
                     }
             });
-
+                break;
                 }
             }
         });
@@ -345,12 +371,13 @@ public class CarbonScope extends JFrame{
                         diet = new Diet(Food.VEGETARIAN, mealsPerDay); 
                         double dietFootprint = diet.calculateFootprint() * 7;
 
-                        outputArea.append("Vegetarian Footprint: " + dietFootprint + "kg CO₂/week\n");
+                        outputArea.append(choice + " Footprint: " + dietFootprint + "kg CO₂/week\n");
                     
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(this, "Invalid input!", "Error", JOptionPane.ERROR_MESSAGE);
                             }
                         });
+                        break;
                     }
 
                 case "Meat-heavy" -> {
@@ -382,12 +409,13 @@ public class CarbonScope extends JFrame{
                         diet = new Diet(Food.MEATHEAVY, mealsPerDay); 
                         double dietFootprint = diet.calculateFootprint() * 7;
 
-                        outputArea.append("Vegetarian Footprint: " + dietFootprint + "kg CO₂/week\n");
+                        outputArea.append(choice + " Footprint: " + dietFootprint + "kg CO₂/week\n");
                     
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(this, "Invalid input!", "Error", JOptionPane.ERROR_MESSAGE);
                             }
                         });
+                        break;
                 }
 
                 case "Balanced" -> {
@@ -419,12 +447,13 @@ public class CarbonScope extends JFrame{
                         diet = new Diet(Food.BALANCED, mealsPerDay); 
                         double dietFootprint = diet.calculateFootprint() * 7;
 
-                        outputArea.append("Vegetarian Footprint: " + dietFootprint + "kg CO₂/week\n");
+                        outputArea.append(choice + " Footprint: " + dietFootprint + "kg CO₂/week\n");
                     
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(this, "Invalid input!", "Error", JOptionPane.ERROR_MESSAGE);
                             }
                         });
+                        break;
                 }
             }
 
@@ -483,6 +512,7 @@ public class CarbonScope extends JFrame{
                             JOptionPane.showMessageDialog(this, "Invalid input!", "Error", JOptionPane.ERROR_MESSAGE);
                             }
                         });
+                        break;
                     }
 
                 case "Bus" -> {
@@ -511,7 +541,7 @@ public class CarbonScope extends JFrame{
                     calculateBusButton.addActionListener(cbb ->{
 
                     try {
-                        int rides = Integer.parseInt(mileageField.getText());
+                        int rides = Integer.parseInt(yearlyUseField.getText());
                         double mileage = Double.parseDouble(mileageField.getText());
 
                         if (rides < 0 || mileage < 0) {
@@ -528,6 +558,7 @@ public class CarbonScope extends JFrame{
                             JOptionPane.showMessageDialog(this, "Invalid input!", "Error", JOptionPane.ERROR_MESSAGE);
                             }
                         });
+                        break;
                     }
 
                     case "Aeroplane" -> {
@@ -573,6 +604,7 @@ public class CarbonScope extends JFrame{
                             JOptionPane.showMessageDialog(this, "Invalid input!", "Error", JOptionPane.ERROR_MESSAGE);
                             }
                         });
+                        break;
                     }
                     
             }
@@ -581,18 +613,23 @@ public class CarbonScope extends JFrame{
             vehicleDetailsPanel.repaint();
         });
 
-        // To model our user
-        user = new User(userNameField.getText(), userLocationField.getText(), userVehicle, home, diet, 320);
-
+        // When the calculator button is clicked
         calculatorButton.addActionListener(cb -> {
-            while (userNameField == null || userNameField.getText().isBlank() || userLocationField == null || userLocationField.getText().isBlank()){
-                outputArea.append("Kindly enter your name and location");
+            if (userNameField.getText().isBlank() || userLocationField.getText().isBlank()){
+                JOptionPane.showMessageDialog(this, "Kindly enter your name and location first");
+                return;
             }
+
+            // To model our user (need a label to collect kg of waste)
+            user = new User(userNameField.getText(), userLocationField.getText(), userVehicle, home, diet, 32);
 
             // Calculate screen
             JPanel calculateScreen = new JPanel(new GridLayout(3,1,10,10));
             calculateScreen.setBackground(lightCream);
             calculateScreen.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+
+            centerPanel.add(calculateScreen, "CALCULATE");
+            cardLayout.show(centerPanel, "CALCULATE");
 
             // -------------------- Calculate user's total footprint --------------------
             calculateTotalButton = new JButton("Calculate Total Footprint");
@@ -609,9 +646,11 @@ public class CarbonScope extends JFrame{
 
         });
 
+        // When the summary button is clicked
         summaryButton.addActionListener(cb -> {
-            while (userNameField == null || userNameField.getText().isBlank() || userLocationField == null || userLocationField.getText().isBlank()){
-                outputArea.append("Kindly enter your name and location");
+            if (user == null){
+                JOptionPane.showMessageDialog(this, "Please calculate your footprint first");
+                return;
             }
 
             // Summary statistics screen
@@ -619,20 +658,38 @@ public class CarbonScope extends JFrame{
             summaryScreen.setBackground(lightCream);
             summaryScreen.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 
-            // -------------------- Summarizing user's total footprint --------------------
-            outputArea.append(user.generateSummary());
+            centerPanel.add(summaryScreen, "SUMMARY");
+            cardLayout.show(centerPanel, "SUMMARY");
+
+            // -------------------- Calculate user's total footprint --------------------
+            summarizeButton = new JButton("CARBON FOOTPRINT SUMMARY");
+            summarizeButton.setBackground(leafGreen);
+            summarizeButton.setForeground(Color.WHITE);
+            summarizeButton.setBorderPainted(false);
+            summarizeButton.setOpaque(true);
+
+            summaryScreen.add(summarizeButton);
+
+            summarizeButton.addActionListener(ct -> {
+                // -------------------- Summarizing user's total footprint --------------------
+                outputArea.append("\n" + user.generateSummary() + "\n");
+            });
 
         });
 
+        // When the tips button is clicked
         tipsButton.addActionListener(cb -> {
-            while (userNameField == null || userNameField.getText().isBlank() || userLocationField == null || userLocationField.getText().isBlank()){
-                outputArea.append("Kindly enter your name and location");
+            if (user == null){
+                JOptionPane.showMessageDialog(this, "Please calculate your footprint first");
             }
 
             // Tips screen
             JPanel tipsScreen = new JPanel(new GridLayout(3,1,10,10));
             tipsScreen.setBackground(lightCream);
             tipsScreen.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+
+            centerPanel.add(tipsScreen, "TIPS");
+            cardLayout.show(centerPanel, "TIPS");
 
             // -------------------- Tips tailored to a user's total footprint --------------------
             outputArea.append(user.generateTips());
@@ -642,10 +699,11 @@ public class CarbonScope extends JFrame{
         
     }
 
+    // Update home object and display total home footprint in output area
     private void updateHomeTotal() {
         if (electricity != null || cooking != null) {
             home = new Home(electricity, cooking);
-            outputArea.setText("Home Total Emissions: " + String.format("%.2f", home.calculateFootprint()) + " kg CO₂/year");
+            outputArea.append("Home Total Emissions: " + String.format("%.2f", home.calculateFootprint()) + " kg CO₂/year");
         }
     }
 
