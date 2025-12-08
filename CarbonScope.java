@@ -27,6 +27,9 @@ public class CarbonScope extends JFrame{
     // Output area
     private JTextArea outputArea;
 
+    //SummaryArea
+    private JTextArea summaryArea;
+
     private JButton homeButton, calculatorButton, summaryButton, tipsButton;
     private JButton vehicleButton, homeActivityButton, dietButton;
 
@@ -210,11 +213,21 @@ public class CarbonScope extends JFrame{
         addHoverEffect(dietButton);
 
         // Summary statistics screen
-        JPanel summaryScreen = new JPanel(new GridLayout(3,1,10,10));
+        JPanel summaryScreen = new JPanel(new BorderLayout());
         summaryScreen.setBackground(lightCream);
         summaryScreen.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 
+        // Create summaryArea and put it inside a scroll pane
+        summaryArea = new JTextArea(15, 60);
+        summaryArea.setEditable(false);
+        summaryArea.setLineWrap(true);
+        summaryArea.setWrapStyleWord(true);
+        summaryArea.setBackground(lightCream);
+        summaryArea.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+        summaryScreen.add(new JScrollPane(summaryArea), BorderLayout.CENTER);
+
         centerPanel.add(summaryScreen, "SUMMARY");
+
 
         // Tips screen
         JPanel tipsScreen = new JPanel(new GridLayout(3,1,10,10));
@@ -717,24 +730,45 @@ public class CarbonScope extends JFrame{
 
         });
 
-        // When the summary button is clicked
         summaryButton.addActionListener(sb -> {
-            if (user == null){
+            if (userVehicle == null || home == null || diet == null) {
                 JOptionPane.showMessageDialog(this, "Please calculate your footprint first");
                 return;
             }
 
-            // To model our user (need a label to collect kg of waste)
-            user = new User(userNameField.getText(), userLocationField.getText(), userVehicle, home, diet, 32);
+            if (user == null) {
+                user = new User(
+                    userNameField.getText(),
+                    userLocationField.getText(),
+                    userVehicle,
+                    home,
+                    diet,
+                    32
+                );
+            } else {
+                user.setName(userNameField.getText());
+                user.setLocation(userLocationField.getText());
+                user.setVehicle(userVehicle);
+                user.setHome(home);
+                user.setDiet(diet);
+            }
 
+            // Get the summary text and guard against empty result
+            String summaryText = user.generateSummary();
+            if (summaryText == null || summaryText.isBlank()) {
+                summaryText = "Summary is empty — please check your input or the generateSummary() method.";
+                System.out.println("DEBUG: generateSummary() returned empty for user: " + user);
+            }
+
+            // Show summary card and set the text on the summaryArea (not global outputArea)
             cardLayout.show(centerPanel, "SUMMARY");
-
-            // -------------------- Summarizing user's total footprint --------------------
-            outputArea.append("\n" + user.generateSummary() + "\n");
-
+            summaryArea.setText(summaryText);
+            summaryArea.setCaretPosition(0); // scroll to top
             summaryScreen.revalidate();
-
+            summaryScreen.repaint();
         });
+
+
 
         // When the tips button is clicked
         tipsButton.addActionListener(tb -> {
