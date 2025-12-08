@@ -490,7 +490,7 @@ public class CarbonScope extends JFrame{
                         }
 
                         diet = new Diet(Food.MEATHEAVY, mealsPerDay); 
-                        double dietFootprint = diet.calculateFootprint() * 7;
+                        double dietFootprint = diet.calculateFootprint() ;
 
                         outputArea.append(choice + " Footprint: " + dietFootprint + "kg CO₂/month\n");
                     
@@ -528,7 +528,7 @@ public class CarbonScope extends JFrame{
                         }
 
                         diet = new Diet(Food.BALANCED, mealsPerDay); 
-                        double dietFootprint = diet.calculateFootprint() * 7;
+                        double dietFootprint = diet.calculateFootprint() ;
 
                         outputArea.append(choice + " Footprint: " + dietFootprint + "kg CO₂/month\n");
                     
