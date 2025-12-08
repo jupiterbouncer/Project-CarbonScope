@@ -119,10 +119,10 @@ public class User implements EmissionFootprintSummary {
     if (vehicleFootprint > 1000) { 
         tips += "- Consider using public transportation, reducing car travel, or switching to a more fuel efficient or electric vehicle.\n"; 
     }  
-    if(homeFootprint > 2000) { 
-        tips += "I- Improve home energy efficiency by using energy-efficient appliances, insulating your home, and switching to renewable energy sources.\n";
+    if(homeFootprint > 400) { 
+        tips += "- Improve home energy efficiency by using energy-efficient appliances, insulating your home, and switching to renewable energy sources.\n";
     } 
-    if (dietFootprint > 120) { 
+    if (dietFootprint > 100) { 
         tips += "- Adopt a more plant-based diet, reduce meat consumption, and minimize food waste.\n";  
     } 
     if (wasteFootprint > 100) { 

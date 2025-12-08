@@ -492,7 +492,7 @@ public class CarbonScope extends JFrame{
                         diet = new Diet(Food.MEATHEAVY, mealsPerDay); 
                         double dietFootprint = diet.calculateFootprint() * 7;
 
-                        outputArea.append(choice + " Footprint: " + dietFootprint + "kg CO₂/day\n");
+                        outputArea.append(choice + " Footprint: " + dietFootprint + "kg CO₂/month\n");
                     
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(this, "Invalid input!", "Error", JOptionPane.ERROR_MESSAGE);
