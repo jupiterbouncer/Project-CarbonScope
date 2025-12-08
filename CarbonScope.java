@@ -660,7 +660,7 @@ public class CarbonScope extends JFrame{
 
                     vehicleDetailsPanel.add(flightsPerYearField);
 
-                    vehicleDetailsPanel.add(new JLabel("Distance travelled by flight: ")); 
+                    vehicleDetailsPanel.add(new JLabel("Average Distance travelled by flight(km): ")); 
                     mileageField = new JTextField(10);
                     mileageField.setBackground(lightCream);
                     mileageField.setBorder(BorderFactory.createLineBorder(new Color(230, 220, 210)));
@@ -800,7 +800,7 @@ public class CarbonScope extends JFrame{
     private void updateHomeTotal() {
         if (electricity != null || cooking != null) {
             home = new Home(electricity, cooking);
-            outputArea.append("Home Total Emissions: " + String.format("%.2f", home.calculateFootprint()) + " kg CO₂/year");
+            outputArea.append("Home Total Emissions: " + String.format("%.2f", home.calculateFootprint()) + " kg CO₂/month");
         }
     }
 
