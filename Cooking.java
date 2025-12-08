@@ -1,6 +1,6 @@
 public class Cooking extends CarbonFootprint {
 
-    private double fuelUsage;
+    private double fuelUsage;// kg
     private String fuelType;
 
     // Constructor with fuel usage and type

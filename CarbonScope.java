@@ -342,7 +342,7 @@ public class CarbonScope extends JFrame{
 
             switch (choice) {
                 case "Cooking" -> {
-                        activityDetailsPanel.add(new JLabel("Monthly Fuel Usage (kg/L):"));
+                        activityDetailsPanel.add(new JLabel("Monthly Fuel Usage (kg):"));
                         fuelConsumptionField = new JTextField(10);
                         fuelConsumptionField.setBackground(lightCream);
                         fuelConsumptionField.setBorder(BorderFactory.createLineBorder(new Color(230, 220, 210)));
