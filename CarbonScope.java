@@ -787,11 +787,12 @@ public class CarbonScope extends JFrame{
             cardLayout.show(centerPanel, "TIPS");
 
             // Put the tips on the tipsArea, NOT outputArea
-            tipsArea.setText(user.generateTips());
+            String tipsText = user.generateTips();
+            tipsArea.setText(tipsText);
             tipsArea.setCaretPosition(0);
+            tipsScreen.revalidate();
+            tipsScreen.repaint();
         });
-
-
         setVisible(true);
         
     }
