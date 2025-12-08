@@ -21,6 +21,6 @@ public class Bus extends Vehicle {
 
     @Override
     public double calculateFootprint(){
-        return 0.026 * calculateFootprint() * yearlyUse;
+        return 0.026 * super.calculateFootprint() * yearlyUse;
     }
 }

@@ -99,16 +99,12 @@ public class CarbonScope extends JFrame{
 
         // Adding these buttons to the left panel
         leftPanel.add(homeButton);
-        addHoverEffect(homeButton);
 
         leftPanel.add(calculatorButton);
-        addHoverEffect(calculatorButton);
 
         leftPanel.add(summaryButton);
-        addHoverEffect(summaryButton);
 
         leftPanel.add(tipsButton);
-        addHoverEffect(tipsButton);
 
         // Adding the panel (now with buttons) to the GUI
         add(leftPanel, BorderLayout.WEST);
@@ -208,13 +204,10 @@ public class CarbonScope extends JFrame{
 
         // Adding these buttons to the home screen
         homeScreen.add(vehicleButton);
-        addHoverEffect(vehicleButton);
 
         homeScreen.add(homeActivityButton);
-        addHoverEffect(homeActivityButton);
 
         homeScreen.add(dietButton);
-        addHoverEffect(dietButton);
 
         // Summary statistics screen
         JPanel summaryScreen = new JPanel(new BorderLayout());
@@ -746,7 +739,7 @@ public class CarbonScope extends JFrame{
 
         summaryButton.addActionListener(sb -> {
             if (userVehicle == null || home == null || diet == null) {
-                JOptionPane.showMessageDialog(this, "Please calculate your footprint first");
+                JOptionPane.showMessageDialog(this, "Please calculate your footprints first");
                 return;
             }
 
@@ -809,18 +802,6 @@ public class CarbonScope extends JFrame{
             home = new Home(electricity, cooking);
             outputArea.append("Home Total Emissions: " + String.format("%.2f", home.calculateFootprint()) + " kg CO₂/year");
         }
-    }
-
-    private void addHoverEffect(JButton button){
-        button.addMouseListener(new java.awt.event.MouseAdapter(){
-            public void mouseEntered(java.awt.event.MouseEvent event){
-                button.setBackground(new Color(102,187,106)); // lighter green
-            }
-
-            public void mouseExited(java.awt.event.MouseEvent event){
-                button.setBackground(new Color(76,175,80)); // original
-            }
-        });
     }
 
     public static void main(String[] args) {

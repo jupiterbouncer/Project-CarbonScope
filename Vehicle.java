@@ -36,9 +36,10 @@ public class Vehicle extends CarbonFootprint {
         else this.fuelConsumption = fuelConsumption;
     }
 
-    // Calculating the carbon footprint for a gasoline car
+    // Calculating the carbon footprint
+    @Override
     public double calculateFootprint(){
-        return 2.3 * mileage * fuelConsumption;
+        return mileage * fuelConsumption; // basic implementation of the carbon footprint of a vehicle
     }
 }
 
