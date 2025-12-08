@@ -1,8 +1,9 @@
 public class User implements EmissionFootprintSummary {
-    //storing user name and location
+    // Storing user name and location
     private String name;
     private String location;
-    //calling the vehicle, home and diet objects as member variables
+    
+    // Calling the vehicle, home and diet objects as member variables
     private Vehicle vehicle; 
     private Home home; 
     private Diet diet;
@@ -97,11 +98,11 @@ public class User implements EmissionFootprintSummary {
        String summary = 
        "Carbon Footprint for: " + this.name + "\n" + 
        "Location: " + this.location + "\n" + 
-       "Vehicle Footprint : " + vehicle.calculateFootprint() + " kg CO2\n" + 
-       "Home Footprint: " + home.calculateFootprint() + " kg CO2\n" + 
-       "Diet Footprint:" + diet.calculateFootprint() + " kg CO2\n" + 
-       "Waste Footprint: " + wasteFootprint + " kg C02\n" + 
-       "Total Carbon Footprint : " + totalUserFootprint() + " kgC02\\month\n"; 
+       "Vehicle Footprint : " + vehicle.calculateFootprint() + " kg CO₂\n" +
+       "Home Footprint: " + home.calculateFootprint() + " kg CO₂\n" +
+       "Diet Footprint:" + diet.calculateFootprint() + " kg CO₂\n" +
+       "Waste Footprint: " + wasteFootprint + " kg C0₂\n" +
+       "Total Carbon Footprint : " + totalUserFootprint() + " kgC0₂/month\n";
        return summary;
     }
 
