@@ -1,5 +1,5 @@
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public class CarbonScope extends JFrame{
 
@@ -575,7 +575,7 @@ public class CarbonScope extends JFrame{
                         }
 
                         userVehicle = new Car(engineChoice, mileage, fuelConsumption); 
-                        double vehicleFootprint = userVehicle.calculateFootprint();
+                        double vehicleFootprint =Math.round(userVehicle.calculateFootprint()*100)/100.0;
 
                         outputArea.append("Car Footprint: " + vehicleFootprint + "kg CO₂/week\n");
                     
@@ -621,7 +621,7 @@ public class CarbonScope extends JFrame{
                         }
 
                         userVehicle = new Bus(rides, mileage, 3.4); 
-                        double vehicleFootprint = userVehicle.calculateFootprint();
+                        double vehicleFootprint =Math.round(userVehicle.calculateFootprint()*100)/100.0;
 
                         outputArea.append("Bus Footprint: " + vehicleFootprint + "kg CO₂/week\n");
                     
@@ -667,7 +667,7 @@ public class CarbonScope extends JFrame{
                         }
 
                         userVehicle = new Aeroplane(flightsPerYear, mileage, 90000); 
-                        double vehicleFootprint = userVehicle.calculateFootprint();
+                        double vehicleFootprint =Math.round(userVehicle.calculateFootprint()*100)/100.0;
 
                         outputArea.append("Aeroplane Footprint: " + vehicleFootprint + "kg CO₂/year\n");
                     
