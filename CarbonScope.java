@@ -710,7 +710,7 @@ public class CarbonScope extends JFrame{
             calculateScreen.add(calculateTotalButton);
 
             calculateTotalButton.addActionListener(ctb -> {
-                outputArea.append("\n=== Total Footprint: " + user.totalUserFootprint() + " kg CO₂ ===\n");
+                outputArea.append("\n=== Total Footprint: " + Math.round(user.totalUserFootprint()*100)/100 + " kg CO₂ ===\n");
             });
 
             calculateScreen.revalidate();
