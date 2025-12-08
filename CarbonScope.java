@@ -30,6 +30,10 @@ public class CarbonScope extends JFrame{
     //SummaryArea
     private JTextArea summaryArea;
 
+    //TipsArea
+    private JTextArea tipsArea;
+
+
     private JButton homeButton, calculatorButton, summaryButton, tipsButton;
     private JButton vehicleButton, homeActivityButton, dietButton;
 
@@ -229,12 +233,22 @@ public class CarbonScope extends JFrame{
         centerPanel.add(summaryScreen, "SUMMARY");
 
 
-        // Tips screen
-        JPanel tipsScreen = new JPanel(new GridLayout(3,1,10,10));
+        // TIPS SCREEN
+        JPanel tipsScreen = new JPanel(new BorderLayout());
         tipsScreen.setBackground(lightCream);
-        tipsScreen.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
+        tipsScreen.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        tipsArea = new JTextArea(15, 60);
+        tipsArea.setEditable(false);
+        tipsArea.setLineWrap(true);
+        tipsArea.setWrapStyleWord(true);
+        tipsArea.setBackground(lightCream);
+        tipsArea.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        tipsScreen.add(new JScrollPane(tipsArea), BorderLayout.CENTER);
 
         centerPanel.add(tipsScreen, "TIPS");
+
 
         // Vehicle screen
         JPanel vehicleScreen = new JPanel(new BorderLayout());
@@ -774,16 +788,16 @@ public class CarbonScope extends JFrame{
         tipsButton.addActionListener(tb -> {
             if (user == null){
                 JOptionPane.showMessageDialog(this, "Please calculate your footprint first");
+                return;
             }
-
-            // To model our user (need a label to collect kg of waste)
-            user = new User(userNameField.getText(), userLocationField.getText(), userVehicle, home, diet, 32);
 
             cardLayout.show(centerPanel, "TIPS");
 
-            // -------------------- Tips tailored to a user's total footprint --------------------
-            outputArea.append(user.generateTips());
+            // Put the tips on the tipsArea, NOT outputArea
+            tipsArea.setText(user.generateTips());
+            tipsArea.setCaretPosition(0);
         });
+
 
         setVisible(true);
         
