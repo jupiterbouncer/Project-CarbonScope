@@ -433,7 +433,7 @@ public class CarbonScope extends JFrame{
             switch (choice) {
 
                 case "Vegetarian" -> { 
-                    dietDetailsPanel.add(new JLabel("Vegetarian meals (per/week): ")); 
+                    dietDetailsPanel.add(new JLabel("Vegetarian meals (per/day): ")); 
                     mealsPerDayField = new JTextField(10);
                     mealsPerDayField.setBackground(lightCream);
                     mealsPerDayField.setBorder(BorderFactory.createLineBorder(new Color(230, 220, 210)));
@@ -454,14 +454,14 @@ public class CarbonScope extends JFrame{
                         int mealsPerDay = Integer.parseInt(mealsPerDayField.getText());
 
                         if (mealsPerDay < 0) {
-                            outputArea.append("Meals per week cannot be negative.\n");
+                            outputArea.append("Meals per day cannot be negative.\n");
                             return;
                         }
 
                         diet = new Diet(Food.VEGETARIAN, mealsPerDay); 
-                        double dietFootprint = diet.calculateFootprint() * 7;
+                        double dietFootprint = diet.calculateFootprint() ;
 
-                        outputArea.append(choice + " Footprint: " + dietFootprint + "kg CO₂/week\n");
+                        outputArea.append(choice + " Footprint: " + dietFootprint + "kg CO₂/month\n");
                     
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(this, "Invalid input!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -471,7 +471,7 @@ public class CarbonScope extends JFrame{
                     }
 
                 case "Meat-heavy" -> {
-                    dietDetailsPanel.add(new JLabel("Meat-heavy meals (per/week): ")); 
+                    dietDetailsPanel.add(new JLabel("Meat-heavy meals (per/day): ")); 
                     mealsPerDayField = new JTextField(10);
                     mealsPerDayField.setBackground(lightCream);
                     mealsPerDayField.setBorder(BorderFactory.createLineBorder(new Color(230, 220, 210)));
@@ -492,14 +492,14 @@ public class CarbonScope extends JFrame{
                         int mealsPerDay = Integer.parseInt(mealsPerDayField.getText());
 
                         if (mealsPerDay < 0) {
-                            outputArea.append("Meals per week cannot be negative.\n");
+                            outputArea.append("Meals per day cannot be negative.\n");
                             return;
                         }
 
                         diet = new Diet(Food.MEATHEAVY, mealsPerDay); 
                         double dietFootprint = diet.calculateFootprint() * 7;
 
-                        outputArea.append(choice + " Footprint: " + dietFootprint + "kg CO₂/week\n");
+                        outputArea.append(choice + " Footprint: " + dietFootprint + "kg CO₂/day\n");
                     
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(this, "Invalid input!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -509,7 +509,7 @@ public class CarbonScope extends JFrame{
                 }
 
                 case "Balanced" -> {
-                    dietDetailsPanel.add(new JLabel("Balanced meals (per/week): ")); 
+                    dietDetailsPanel.add(new JLabel("Balanced meals (per/day): ")); 
                     mealsPerDayField = new JTextField(10);
                     mealsPerDayField.setBackground(lightCream);
                     mealsPerDayField.setBorder(BorderFactory.createLineBorder(new Color(230, 220, 210)));
@@ -530,14 +530,14 @@ public class CarbonScope extends JFrame{
                         int mealsPerDay = Integer.parseInt(mealsPerDayField.getText());
 
                         if (mealsPerDay < 0) {
-                            outputArea.append("Meals per week cannot be negative.\n");
+                            outputArea.append("Meals per day cannot be negative.\n");
                             return;
                         }
 
                         diet = new Diet(Food.BALANCED, mealsPerDay); 
                         double dietFootprint = diet.calculateFootprint() * 7;
 
-                        outputArea.append(choice + " Footprint: " + dietFootprint + "kg CO₂/week\n");
+                        outputArea.append(choice + " Footprint: " + dietFootprint + "kg CO₂/month\n");
                     
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(this, "Invalid input!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -602,9 +602,9 @@ public class CarbonScope extends JFrame{
                         }
 
                         userVehicle = new Car(engineChoice, mileage, fuelConsumption); 
-                        double vehicleFootprint =Math.round(userVehicle.calculateFootprint()*100)/100.0;
+                        double vehicleFootprint =Math.round(userVehicle.calculateFootprint()*4*100)/100.0;
 
-                        outputArea.append("Car Footprint: " + vehicleFootprint + "kg CO₂/week\n");
+                        outputArea.append("Car Footprint: " + vehicleFootprint + "kg CO₂/month\n");
                     
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(this, "Invalid input!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -648,9 +648,9 @@ public class CarbonScope extends JFrame{
                         }
 
                         userVehicle = new Bus(rides, mileage, 3.4); 
-                        double vehicleFootprint =Math.round(userVehicle.calculateFootprint()*100)/100.0;
+                        double vehicleFootprint =Math.round(userVehicle.calculateFootprint()*4*100)/100.0;
 
-                        outputArea.append("Bus Footprint: " + vehicleFootprint + "kg CO₂/week\n");
+                        outputArea.append("Bus Footprint: " + vehicleFootprint + "kg CO₂/month\n");
                     
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(this, "Invalid input!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -667,7 +667,7 @@ public class CarbonScope extends JFrame{
 
                     vehicleDetailsPanel.add(flightsPerYearField);
 
-                    vehicleDetailsPanel.add(new JLabel("Mileage (km/week): ")); 
+                    vehicleDetailsPanel.add(new JLabel("Distance travelled by flight: ")); 
                     mileageField = new JTextField(10);
                     mileageField.setBackground(lightCream);
                     mileageField.setBorder(BorderFactory.createLineBorder(new Color(230, 220, 210)));
@@ -696,7 +696,7 @@ public class CarbonScope extends JFrame{
                         userVehicle = new Aeroplane(flightsPerYear, mileage, 90000); 
                         double vehicleFootprint =Math.round(userVehicle.calculateFootprint()*100)/100.0;
 
-                        outputArea.append("Aeroplane Footprint: " + vehicleFootprint + "kg CO₂/year\n");
+                        outputArea.append("Aeroplane Footprint: " + vehicleFootprint + "kg CO₂/month\n");
                     
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(this, "Invalid input!", "Error", JOptionPane.ERROR_MESSAGE);

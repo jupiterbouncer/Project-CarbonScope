@@ -30,11 +30,11 @@ public class Diet extends CarbonFootprint {
 
     @Override
     public double calculateFootprint(){
-        if (foodCategory.equals(Food.MEATHEAVY)) return 3.6 * mealsPerDay;
+        if (foodCategory.equals(Food.MEATHEAVY)) return 3.6 * mealsPerDay*30;
 
-        if (foodCategory.equals(Food.VEGETARIAN)) return 0.6 * mealsPerDay; 
+        if (foodCategory.equals(Food.VEGETARIAN)) return 0.6 * mealsPerDay*30; 
 
-        if (foodCategory.equals(Food.BALANCED)) return 0.75 * mealsPerDay; 
+        if (foodCategory.equals(Food.BALANCED)) return 0.75 * mealsPerDay*30; 
 
         else return 1;
     }

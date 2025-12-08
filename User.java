@@ -101,7 +101,7 @@ public class User implements EmissionFootprintSummary {
        "Home Footprint: " + home.calculateFootprint() + " kg CO2\n" + 
        "Diet Footprint:" + diet.calculateFootprint() + " kg CO2\n" + 
        "Waste Footprint: " + wasteFootprint + " kg C02\n" + 
-       "Total Carbon Footprint : " + totalUserFootprint() + " kgC02\n"; 
+       "Total Carbon Footprint : " + totalUserFootprint() + " kgC02\\month\n"; 
        return summary;
     }
 
@@ -122,7 +122,7 @@ public class User implements EmissionFootprintSummary {
     if(homeFootprint > 2000) { 
         tips += "I- Improve home energy efficiency by using energy-efficient appliances, insulating your home, and switching to renewable energy sources.\n";
     } 
-    if (dietFootprint > 1500) { 
+    if (dietFootprint > 120) { 
         tips += "- Adopt a more plant-based diet, reduce meat consumption, and minimize food waste.\n";  
     } 
     if (wasteFootprint > 100) { 
