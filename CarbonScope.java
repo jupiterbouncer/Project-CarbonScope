@@ -102,7 +102,7 @@ public class CarbonScope extends JFrame{
         CardLayout cardLayout = new CardLayout();
         centerPanel.setLayout(cardLayout);
 
-        // =============== DASHBOARD ====================
+        // =============== DASHBOARD ==================== (contains logo, motivation message, statistic)
         JPanel dashboardScreen = new JPanel();
         dashboardScreen.setLayout(new BoxLayout(dashboardScreen, BoxLayout.Y_AXIS));
         dashboardScreen.setBackground(lightCream);
@@ -114,17 +114,17 @@ public class CarbonScope extends JFrame{
 
         dashboardScreen.add(Box.createRigidArea(new Dimension(20,30)));
 
+        JLabel motivation = new JLabel("Track your impact. Take control!", SwingConstants.CENTER);
+        motivation.setFont(new Font("Segoe UI", Font.BOLD, 22));
+        motivation.setAlignmentX(Component.CENTER_ALIGNMENT);
+        dashboardScreen.add(motivation);
+
         JButton getStartedButton = new JButton("Get Started");
         styleButton(getStartedButton);
         getStartedButton.setFont(new Font("Sagoe UI", Font.BOLD, 16));
         getStartedButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         dashboardScreen.add(getStartedButton);
-
-        JLabel motivation = new JLabel("Track your impact. Take control!", SwingConstants.CENTER);
-        motivation.setFont(new Font("Segoe UI", Font.BOLD, 22));
-        motivation.setAlignmentX(Component.CENTER_ALIGNMENT);
-        dashboardScreen.add(motivation);
 
         JLabel globalStat = new JLabel("Global Average CO₂ Emissions Per Person: 4.7 tons/year", SwingConstants.CENTER);
         globalStat.setFont(new Font("Segoe UI", Font.ITALIC, 16));
@@ -133,6 +133,7 @@ public class CarbonScope extends JFrame{
 
         centerPanel.add(dashboardScreen, "DASHBOARD");
 
+        // Once the get started button is pressed, user should be directed to the HOME panel
         getStartedButton.addActionListener(gsb -> {
             cardLayout.show(centerPanel, "HOME");
         });
@@ -160,6 +161,7 @@ public class CarbonScope extends JFrame{
         userLocationField.setBorder(BorderFactory.createLineBorder(new Color(230, 220, 210)));
         formPanel.add(userLocationField);
 
+        // adding these forms to the HOMESCREEN
         homeScreen.add(formPanel, BorderLayout.NORTH);
 
         // The vehicle button for matters relating to Vehicles
