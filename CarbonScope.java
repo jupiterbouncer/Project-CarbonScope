@@ -637,7 +637,7 @@ public class CarbonScope extends JFrame{
                             return;
                         }
 
-                        userVehicle = new Aeroplane(flightsPerYear, mileage, 90000);
+                        userVehicle = new Aeroplane(flightsPerYear, mileage, 90000); // The average fuel consumption of a plane is 90000L
                         JOptionPane.showMessageDialog(this, "Aeroplane data saved!");
                         double vehicleFootprint =Math.round(userVehicle.calculateFootprint()*100)/100.0;
 
