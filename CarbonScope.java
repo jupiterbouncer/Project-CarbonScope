@@ -553,7 +553,7 @@ public class CarbonScope extends JFrame{
 
                         userVehicle = new Car(engineChoice, mileage, fuelConsumption);
                         JOptionPane.showMessageDialog(this, "Car data saved!");
-                        double vehicleFootprint =Math.round(userVehicle.calculateFootprint()*4*100)/100.0;
+                        double vehicleFootprint =Math.round(userVehicle.calculateFootprint() * 4 * 100) / 100.0;
 
                         outputArea.append("\nCar Footprint: " + vehicleFootprint + "kg CO₂/month\n");
                     
@@ -597,7 +597,7 @@ public class CarbonScope extends JFrame{
 
                         userVehicle = new Bus(rides, mileage, 3.4);
                         JOptionPane.showMessageDialog(this, "Bus data saved!");
-                        double vehicleFootprint =Math.round(userVehicle.calculateFootprint()*4*100)/100.0;
+                        double vehicleFootprint =Math.round(userVehicle.calculateFootprint() * 4 * 100) / 100.0;
 
                         outputArea.append("Bus Footprint: " + vehicleFootprint + "kg CO₂/month\n");
                     
@@ -641,7 +641,7 @@ public class CarbonScope extends JFrame{
 
                         userVehicle = new Aeroplane(flightsPerYear, mileage, 90000); // The average fuel consumption of a plane is 90000L
                         JOptionPane.showMessageDialog(this, "Aeroplane data saved!");
-                        double vehicleFootprint =Math.round(userVehicle.calculateFootprint()*100)/100.0;
+                        double vehicleFootprint =Math.round(userVehicle.calculateFootprint() * 100) / 100.0;
 
                         outputArea.append("Aeroplane Footprint: " + vehicleFootprint + "kg CO₂/month\n");
                     
@@ -681,7 +681,7 @@ public class CarbonScope extends JFrame{
             calculateScreen.add(calculateTotalButton);
 
             calculateTotalButton.addActionListener(ctb -> {
-                outputArea.append("\n=== Total Footprint: " + Math.round(user.totalUserFootprint()*100)/100 + " kg CO₂ ===\n");
+                outputArea.append("\n=== Total Footprint: " + Math.round(user.totalUserFootprint() * 100) / 100 + " kg CO₂ ===\n");
             });
 
             calculateScreen.revalidate();
@@ -737,16 +737,19 @@ public class CarbonScope extends JFrame{
                 return;
             }
 
+            String tipsText = user.generateTips();
+            
             // Pick the tips screen from the card layout
             cardLayout.show(centerPanel, "TIPS");
 
             // Put the tips on the tipsArea, NOT outputArea
-            String tipsText = user.generateTips();
             tipsArea.setText(tipsText);
             tipsArea.setCaretPosition(0);
             tipsScreen.revalidate();
             tipsScreen.repaint();
+            
         });
+        
         setVisible(true);
         
     }
