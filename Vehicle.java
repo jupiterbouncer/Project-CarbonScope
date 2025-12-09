@@ -1,3 +1,4 @@
+// The Vehicle class is another object that can be attributed to Carbon Footprint
 public class Vehicle extends CarbonFootprint {
 
     // Member fields for the Vehicle class
@@ -42,4 +43,5 @@ public class Vehicle extends CarbonFootprint {
         return mileage * fuelConsumption; // basic implementation of the carbon footprint of a vehicle
     }
 }
+
 
