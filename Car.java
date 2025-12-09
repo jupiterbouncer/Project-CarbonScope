@@ -21,9 +21,10 @@ public class Car extends Vehicle {
     // Implementing specific carbon footprint methods for the Car class to cater to different emission factors of different engines
     @Override
     public double calculateFootprint()
-        if (foodCategory.equals("DIESEL")) return 2.51 * super.calculateFootprint() * 30;
-        if (foodCategory.equals("HYBRID")) return 0.188 * super.calculateFootprint() * 30; 
-        if (foodCategory.equals("ELECTRIC")) return 0.083 * super.calculateFootprint() * 30; 
+        if (engineType == "DIESEL")) return 2.51 * super.calculateFootprint() * 30;
+        if (engineType == ("HYBRID")) return 0.188 * super.calculateFootprint() * 30; 
+        if (engineType == ("ELECTRIC")) return 0.083 * super.calculateFootprint() * 30; 
         else return 2.3 * super.calculateFootprint(); // Carbon footprint for a gasoline car
     }
 }
+
