@@ -8,12 +8,12 @@ public class Bus extends Vehicle {
         setYearlyUse(yearlyUse);
     }
 
-    // Getter method
+    // Getter method for the Bus class
     public int getYearlyUse(){
         return this.yearlyUse;
     }
 
-    // Setter method
+    // Setter method for the Bus clas
     public void setYearlyUse(int yearlyUse){
         if (yearlyUse < 0) throw new IllegalArgumentException("Yearly use cannot be negative");
         else this.yearlyUse = yearlyUse;
@@ -21,6 +21,7 @@ public class Bus extends Vehicle {
 
     @Override
     public double calculateFootprint(){
-        return 0.026 * super.calculateFootprint() * yearlyUse;
+        return 0.026 * super.calculateFootprint() * yearlyUse;    // The 0.026 is the average footprint of an individual bus passenger
     }
 }
+
