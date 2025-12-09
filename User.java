@@ -10,7 +10,7 @@ public class User implements EmissionFootprintSummary {
 
     private double kgofWaste;  
 
-    //constructor for the user class
+    // Constructor for the user class
     public User(String name, String location, Vehicle vehicle, Home home, Diet diet, double kgofWaste) { 
         this.name = name;
         this.location = location; 
@@ -20,7 +20,8 @@ public class User implements EmissionFootprintSummary {
         this.kgofWaste = kgofWaste; 
 
     } 
-    //method that calculates the total footprint based on the vehicle, home and diet footprint
+    
+    // Method that calculates the total footprint based on the vehicle, home and diet footprint
     public double totalUserFootprint(){
         double total = 0.0; 
         if (this.vehicle != null) { 
@@ -47,7 +48,8 @@ public class User implements EmissionFootprintSummary {
             }
         }
     }; 
-    //getters and setters for the various member variables
+    
+    // Getter methods for the User class
     public String getName() { 
         return this.name; 
     } 
@@ -68,7 +70,8 @@ public class User implements EmissionFootprintSummary {
     public Home getHome(){
         return this.home;
     } 
-    
+
+    // Setter methods for the user clas
     public void setName(String name){ 
         this.name = name;
     } 
@@ -89,7 +92,7 @@ public class User implements EmissionFootprintSummary {
         this.vehicle = vehicle;
     }
 
-    //this method generates a summary of the user footprint
+    // This method generates a summary of the user footprint
     @Override
     public String generateSummary() { 
         double wasteFactor = 0.5;
@@ -98,7 +101,7 @@ public class User implements EmissionFootprintSummary {
        String summary = 
        "Carbon Footprint for: " + this.name + "\n" + 
        "Location: " + this.location + "\n" + 
-       "Vehicle Footprint : " + vehicle.calculateFootprint() + " kg CO₂\n" +
+       "Vehicle Footprint: " + vehicle.calculateFootprint() + " kg CO₂\n" +
        "Home Footprint: " + home.calculateFootprint() + " kg CO₂\n" +
        "Diet Footprint:" + diet.calculateFootprint() + " kg CO₂\n" +
        "Waste Footprint: " + wasteFootprint + " kg C0₂\n" +
@@ -106,7 +109,7 @@ public class User implements EmissionFootprintSummary {
        return summary;
     }
 
-    // this method generates the tips for the user based on the calculated footprints
+    //This method generates the tips for the user based on the calculated footprints
     @Override
     public String generateTips() {
     double wasteFactor = 0.5;
@@ -118,16 +121,16 @@ public class User implements EmissionFootprintSummary {
     String tips = "Carbon Footprint Reduction Tips for " + name + ":\n"; 
 
     if (vehicleFootprint > 1000) { 
-        tips += "- Consider using public transportation, reducing car travel, or switching to a more fuel efficient or electric vehicle.\n"; 
+        tips += "-" + name + ", consider + using public transportation, reducing car travel, or switching to a more fuel-efficient or electric vehicle.\n"; 
     }  
     if(homeFootprint > 400) { 
-        tips += "- Improve home energy efficiency by using energy-efficient appliances, insulating your home, and switching to renewable energy sources.\n";
+        tips += "-" + name + ", improve home energy efficiency by using energy-efficient appliances, insulating your home, and switching to renewable energy sources.\n";
     } 
     if (dietFootprint > 100) { 
-        tips += "- Adopt a more plant-based diet, reduce meat consumption, and minimize food waste.\n";  
+        tips += "-" + name + ", adopt a more plant-based diet, reduce meat consumption, and minimize food waste.\n";  
     } 
     if (wasteFootprint > 100) { 
-        tips += "- Reduce waste by recycling, composting, and minimizing single-use plastics.\n"; 
+        tips += "-" + name + ", reduce waste by recycling, composting, and minimizing single-use plastics.\n"; 
     } 
     return tips; 
 
